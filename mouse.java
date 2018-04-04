@@ -15,7 +15,26 @@ public class mouse implements MouseListener
         if(screen.view.equals("world"))
         {
             screen.space = true;
-            screen.hit();
+            if(screen.tools.toolNames[screen.tools.toolSelected].equals("wooden axe tool") || screen.tools.toolNames[screen.tools.toolSelected].equals("stone axe tool")|| screen.tools.toolNames[screen.tools.toolSelected].equals("fist"))
+                screen.hit();
+            else
+            {
+                if(MouseInfo.getPointerInfo().getLocation().x % 30 < 15 && MouseInfo.getPointerInfo().getLocation().y % 30 < 15)
+                    screen.elements.add(new element((screen.currX  + MouseInfo.getPointerInfo().getLocation().x) - ((screen.currX  + MouseInfo.getPointerInfo().getLocation().x) % 30) ,(screen.currY  + MouseInfo.getPointerInfo().getLocation().y) - ((screen.currY  + MouseInfo.getPointerInfo().getLocation().y) % 30),30,30,screen.tools.toolNames[screen.tools.toolSelected],139,69,19,100));
+                else if(MouseInfo.getPointerInfo().getLocation().x % 30 < 15 && MouseInfo.getPointerInfo().getLocation().y % 30 >= 15)
+                    screen.elements.add(new element((screen.currX  + MouseInfo.getPointerInfo().getLocation().x) - ((screen.currX  + MouseInfo.getPointerInfo().getLocation().x) % 30) ,(screen.currY  + MouseInfo.getPointerInfo().getLocation().y) + ((30 - (screen.currY  + MouseInfo.getPointerInfo().getLocation().y) % 30)),30,30,screen.tools.toolNames[screen.tools.toolSelected],139,69,19,100));
+                else if(MouseInfo.getPointerInfo().getLocation().x % 30 >= 15 && MouseInfo.getPointerInfo().getLocation().y % 30 < 15)
+                    screen.elements.add(new element((screen.currX  + MouseInfo.getPointerInfo().getLocation().x) + ((30 -(screen.currX  + MouseInfo.getPointerInfo().getLocation().x) % 30)) ,(screen.currY  + MouseInfo.getPointerInfo().getLocation().y) - ( (screen.currY  + MouseInfo.getPointerInfo().getLocation().y) % 30),30,30,screen.tools.toolNames[screen.tools.toolSelected],139,69,19,100));
+                else if(MouseInfo.getPointerInfo().getLocation().x % 30 >= 15 && MouseInfo.getPointerInfo().getLocation().y % 30 >= 15)
+                    screen.elements.add(new element((screen.currX  + MouseInfo.getPointerInfo().getLocation().x) + ((30 -(screen.currX  + MouseInfo.getPointerInfo().getLocation().x) % 30)) ,(screen.currY  + MouseInfo.getPointerInfo().getLocation().y) + ((30 - (screen.currY  + MouseInfo.getPointerInfo().getLocation().y) % 30)),30,30,screen.tools.toolNames[screen.tools.toolSelected],139,69,19,100));
+                
+                screen.currH.addItems("wooden wall",-1,"building");
+                if(screen.currH.getNumItem("wooden wall") <= 0)
+                {   
+                    screen.tools.toolNames[screen.tools.toolSelected] = "fist";
+                    screen.currH.inven.remove(screen.currH.getItemNum("wooden wall"));
+                }
+            }
         }
         else if(screen.view.equals("crafting"))
         {
@@ -28,15 +47,23 @@ public class mouse implements MouseListener
                     {
                         if(b.name.equals("wooden axe") && screen.currH.getNumItem("wood") >= 10)
                         {
-                            screen.currH.inven.add(new item("wooden axe tool",1));
-                            screen.currH.addItems("wood",-10);
+                            screen.currH.inven.add(new item("wooden axe tool",1,"tool"));
+                            screen.currH.addItems("wood",-10,"resource");
                         }
                         else if(b.name.equals("stone axe") && screen.currH.getNumItem("wood") >= 20 && screen.currH.getNumItem("stone") >= 10)
                         {
-                            screen.currH.inven.add(new item("stone axe tool",1));
-                            screen.currH.addItems("wood",-20);
-                            screen.currH.addItems("stone",-10);
+                            screen.currH.inven.add(new item("stone axe tool",1,"tool"));
+                            screen.currH.addItems("wood",-20,"resource");
+                            screen.currH.addItems("stone",-10,"resource");
                         }
+                        else if(b.name.equals("wooden wall") && screen.currH.getNumItem("wood") >= 10)
+                        {
+                            if(screen.currH.stackable("wooden wall") == false)
+                                screen.currH.inven.add(new item("wooden wall",5,"building"));
+                            else 
+                                screen.currH.addItems("wooden wall",5,"building");
+                            screen.currH.addItems("wood",-10,"resource");
+                        }   
                     }
                 }
             }
@@ -47,7 +74,7 @@ public class mouse implements MouseListener
             {
                 if(b.visible == true)
                 {
-                    Rectangle mousePointer = new Rectangle(MouseInfo.getPointerInfo().getLocation().x,MouseInfo.getPointerInfo().getLocation().y,1,1);
+                    Rectangle mousePointer = new Rectangle(MouseInfo.getPointerInfo().getLocation().x,MouseInfo.getPointerInfo().getLocation().y,2,2);
                     if(mousePointer.intersects(new Rectangle(b.X,b.Y + 40,b.XLength,b.YLength)))
                     {
                         screen.tools.toolNames[screen.tools.toolSelected] = b.name; 

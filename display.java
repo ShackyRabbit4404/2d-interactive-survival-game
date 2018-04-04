@@ -96,14 +96,14 @@ public class display extends JPanel
                     else if(tools.toolNames[tools.toolSelected].equals("stone axe tool"))
                         e.health -= 20;
                     else if(tools.toolNames[tools.toolSelected].equals("fist"))
-                        e.health -= 3;
+                        e.health -= 50;
                     space = false;
                     if(e.health <= 0)
                     {
                         if(e.name.equals("tree"))
-                            currH.addItems("wood",3);
+                            currH.addItems("wood",3,"resource");
                         if(e.name.equals("rock"))
-                            currH.addItems("stone",5);
+                            currH.addItems("stone",5,"resource");
                         elements.remove(e);
                     }
                 }
@@ -125,9 +125,9 @@ public class display extends JPanel
                     if(e.health <= 0)
                     {
                         if(e.name.equals("tree"))
-                            currH.addItems("wood",10);
+                            currH.addItems("wood",3,"resource");
                         if(e.name.equals("rock"))
-                            currH.addItems("stone",5);
+                            currH.addItems("stone",5,"resource");
                         elements.remove(e);
                     }
                 }
@@ -191,6 +191,7 @@ public class display extends JPanel
         {
             Buttons.get(1).visible = false;
             Buttons.get(2).visible = false;
+            Buttons.get(3).visible = false;
             E = false;
             Q = false;
             Buttons.get(0).visible = true;
@@ -362,10 +363,15 @@ public class display extends JPanel
                         g.setColor(new Color(205,81,39));
                         g.drawLine(xRightArmPoints[3],yRightArmPoints[3],xLeftArmPoints[3],yLeftArmPoints[3]);
                     }
-                    if(tools.toolNames[i].equals("stone axe tool"))
+                    else if(tools.toolNames[i].equals("stone axe tool"))
                     {
                         g.setColor(Color.BLACK);
                         g.drawLine(xRightArmPoints[3],yRightArmPoints[3],xLeftArmPoints[3],yLeftArmPoints[3]);
+                    }
+                    else if(tools.toolNames[i].equals("wooden wall"))
+                    {
+                        g.setColor(Color.RED);
+                        g.fillRect(MouseInfo.getPointerInfo().getLocation().x - (MouseInfo.getPointerInfo().getLocation().x % 30),MouseInfo.getPointerInfo().getLocation().y - (MouseInfo.getPointerInfo().getLocation().y % 30),30,30);
                     }
                 }
             }
@@ -386,6 +392,11 @@ public class display extends JPanel
                 else if(tools.toolNames[count].equals("stone axe tool"))
                 {
                     g.setColor(Color.BLACK);
+                    g.fillRect(i + 2,904,38,38);
+                }
+                else if(tools.toolNames[count].equals("wooden wall"))
+                {
+                    g.setColor(new Color(139,69,19));
                     g.fillRect(i + 2,904,38,38);
                 }
                 count ++;
@@ -467,6 +478,11 @@ public class display extends JPanel
                     g.setColor(Color.BLACK);
                     g.fillRect(i + 2,904,38,38);
                 }
+                else if(tools.toolNames[count].equals("wooden wall"))
+                {
+                    g.setColor(new Color(139,69,19));
+                    g.fillRect(i + 2,904,38,38);
+                }
                 count ++;
             }
 
@@ -505,6 +521,10 @@ public class display extends JPanel
                         b.clickable = true;
                     else if(b.name.equals("stone axe"))
                         b.clickable = false;
+                    else if(b.name.equals("wooden wall") && currH.inven.get(currH.getItemNum("wood")).quantity >= 10)
+                        b.clickable = true;
+                    else if(b.name.equals("wooden wall"))
+                        b.clickable = false;
                 }
             }
             for(Button b: Buttons)
@@ -524,13 +544,11 @@ public class display extends JPanel
                             g.drawString(b.name,b.X + 15,b.Y + 35);
                             g.setFont(new Font("3",Font.PLAIN,20));
                             if(b.name.equals("wooden axe"))
-                            {
                                 g.drawString("x10 wood", b.X + 15, b.Y + 60);
-                            }
-                            if(b.name.equals("stone axe"))
-                            {
+                            else if(b.name.equals("stone axe"))
                                 g.drawString("x20 wood + x10 stone",b.X + 15,b.Y + 60);
-                            }
+                            else if(b.name.equals("wooden wall"))
+                                g.drawString("x10 wood",b.X + 15,b.Y + 60);
                         }
                         else
                         {
@@ -553,6 +571,8 @@ public class display extends JPanel
                             g.drawString("x10 wood",b.X + 15,b.Y + 60);
                         else if(b.name.equals("stone axe"))
                             g.drawString("x20 wood + x10 stone",b.X + 15,b.Y + 60);
+                        else if(b.name.equals("wooden wall"))
+                                g.drawString("x10 wood",b.X + 15,b.Y + 60);
                     }
                 }
             }

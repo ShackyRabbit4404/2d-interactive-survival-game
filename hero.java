@@ -6,17 +6,24 @@ public class hero
     ArrayList<item> inven = new ArrayList<item>();
     public void setUpInventory()
     {
-        inven.add(new item("wood",0));
-        inven.add(new item("stone",0));
+        inven.add(new item("wood",0,"resource"));
+        inven.add(new item("stone",0,"resource"));
     }
-    public void addItems(String s,int n)
+    public void addItems(String s,int n,String t)
     {
         for(item i: inven)
         {
             if(i.name.equals(s))
-                i.quantity += n;    
+            {
+                for(int a = 0; a < n; a++)
+                {
+                    if(stackable(s))
+                        i.quantity ++;
+                    else 
+                        inven.add(new item(s,1,t));
+                }
+            }
         }
-        
     }
     public int getItemNum(String n)
     {
@@ -36,4 +43,22 @@ public class hero
         }
         return 0;
     }
+    public boolean stackable(String s)
+    {
+        for(item i: inven)
+        {
+            if(i.name.equals(s) && i.quantity < 32)
+                return true;
+        }   
+        return false;
+    }
+    public boolean contains(String s)
+    {
+        for(item i: inven)
+        {
+            if(s.equals(i.name))
+                return true;
+        }
+        return false;
+    }   
 }
