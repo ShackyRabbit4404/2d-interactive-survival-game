@@ -28,11 +28,11 @@ public class mouse implements MouseListener
                 else if(MouseInfo.getPointerInfo().getLocation().x % 30 >= 15 && MouseInfo.getPointerInfo().getLocation().y % 30 >= 15)
                     screen.elements.add(new element((screen.currX  + MouseInfo.getPointerInfo().getLocation().x) + ((30 -(screen.currX  + MouseInfo.getPointerInfo().getLocation().x) % 30)) ,(screen.currY  + MouseInfo.getPointerInfo().getLocation().y) + ((30 - (screen.currY  + MouseInfo.getPointerInfo().getLocation().y) % 30)),30,30,screen.tools.toolNames[screen.tools.toolSelected],139,69,19,100));
                 
-                screen.currH.addItems("wooden wall",-1,"building");
-                if(screen.currH.getNumItem("wooden wall") <= 0)
+                screen.currH.addItems("thatch hut",-1,"building");
+                if(screen.currH.getNumItem("thatch hut") <= 0)
                 {   
                     screen.tools.toolNames[screen.tools.toolSelected] = "fist";
-                    screen.currH.inven.remove(screen.currH.getItemNum("wooden wall"));
+                    screen.currH.inven.remove(screen.currH.getItemNum("thatch hut"));
                 }
             }
         }
@@ -56,12 +56,12 @@ public class mouse implements MouseListener
                             screen.currH.addItems("wood",-20,"resource");
                             screen.currH.addItems("stone",-10,"resource");
                         }
-                        else if(b.name.equals("wooden wall") && screen.currH.getNumItem("wood") >= 10)
+                         else if(b.name.equals("thatch hut") && screen.currH.getNumItem("wood") >= 10)
                         {
-                            if(screen.currH.stackable("wooden wall") == false)
-                                screen.currH.inven.add(new item("wooden wall",5,"building"));
+                            if(screen.currH.stackable("thatch hut") == false)
+                                screen.currH.inven.add(new item("thatch hut",1,"building"));
                             else 
-                                screen.currH.addItems("wooden wall",5,"building");
+                                screen.currH.addItems("thatch hut",1,"building");
                             screen.currH.addItems("wood",-10,"resource");
                         }   
                     }

@@ -368,7 +368,7 @@ public class display extends JPanel
                         g.setColor(Color.BLACK);
                         g.drawLine(xRightArmPoints[3],yRightArmPoints[3],xLeftArmPoints[3],yLeftArmPoints[3]);
                     }
-                    else if(tools.toolNames[i].equals("wooden wall"))
+                    else if(tools.toolNames[i].equals("thatch hut"))
                     {
                         g.setColor(Color.RED);
                         g.fillRect(MouseInfo.getPointerInfo().getLocation().x - (MouseInfo.getPointerInfo().getLocation().x % 30),MouseInfo.getPointerInfo().getLocation().y - (MouseInfo.getPointerInfo().getLocation().y % 30),30,30);
@@ -394,7 +394,7 @@ public class display extends JPanel
                     g.setColor(Color.BLACK);
                     g.fillRect(i + 2,904,38,38);
                 }
-                else if(tools.toolNames[count].equals("wooden wall"))
+                else if(tools.toolNames[count].equals("thatch hut"))
                 {
                     g.setColor(new Color(139,69,19));
                     g.fillRect(i + 2,904,38,38);
@@ -478,7 +478,7 @@ public class display extends JPanel
                     g.setColor(Color.BLACK);
                     g.fillRect(i + 2,904,38,38);
                 }
-                else if(tools.toolNames[count].equals("wooden wall"))
+                else if(tools.toolNames[count].equals("thatch hut"))
                 {
                     g.setColor(new Color(139,69,19));
                     g.fillRect(i + 2,904,38,38);
@@ -521,9 +521,9 @@ public class display extends JPanel
                         b.clickable = true;
                     else if(b.name.equals("stone axe"))
                         b.clickable = false;
-                    else if(b.name.equals("wooden wall") && currH.inven.get(currH.getItemNum("wood")).quantity >= 10)
+                    else if(b.name.equals("thatch hut") && currH.inven.get(currH.getItemNum("wood")).quantity >= 10)
                         b.clickable = true;
-                    else if(b.name.equals("wooden wall"))
+                    else if(b.name.equals("thatch hut"))
                         b.clickable = false;
                 }
             }
@@ -547,7 +547,7 @@ public class display extends JPanel
                                 g.drawString("x10 wood", b.X + 15, b.Y + 60);
                             else if(b.name.equals("stone axe"))
                                 g.drawString("x20 wood + x10 stone",b.X + 15,b.Y + 60);
-                            else if(b.name.equals("wooden wall"))
+                            else if(b.name.equals("thatch hut"))
                                 g.drawString("x10 wood",b.X + 15,b.Y + 60);
                         }
                         else
@@ -571,11 +571,18 @@ public class display extends JPanel
                             g.drawString("x10 wood",b.X + 15,b.Y + 60);
                         else if(b.name.equals("stone axe"))
                             g.drawString("x20 wood + x10 stone",b.X + 15,b.Y + 60);
-                        else if(b.name.equals("wooden wall"))
+                        else if(b.name.equals("thatch hut"))
                                 g.drawString("x10 wood",b.X + 15,b.Y + 60);
                     }
                 }
             }
+        }
+        try{
+           // Thread.sleep(16);
+        }
+        catch(Exception e)
+        {
+            System.out.print(e);
         }
         drawing();
     }

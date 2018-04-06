@@ -9,22 +9,38 @@ public class hero
         inven.add(new item("wood",0,"resource"));
         inven.add(new item("stone",0,"resource"));
     }
+
     public void addItems(String s,int n,String t)
     {
         for(item i: inven)
         {
-            if(i.name.equals(s))
-            {
-                for(int a = 0; a < n; a++)
+            if(i.name.equals(s) && n * (-1) < 0)
+            {   
+                if(n * -1 < 0)
                 {
-                    if(stackable(s))
-                        i.quantity ++;
+                    for(int a = 0; a < n; a++)
+                    {
+                        if(stackable(s))
+                            i.quantity ++;
+                        else 
+                            inven.add(new item(s,1,t));
+                    }
+                }
+                
+            }
+            else if(i.name.equals(s))
+            {
+                for(int a = n; a > 0; a--)
+                {
+                    if(i.quantity == 1 && !i.name.equals("wood") && !i.name.equals("stone"))
+                        inven.remove(i);
                     else 
-                        inven.add(new item(s,1,t));
+                        i.quantity --;
                 }
             }
         }
     }
+
     public int getItemNum(String n)
     {
         for(int i = 0; i < inven.size(); i++)
@@ -34,6 +50,7 @@ public class hero
         }
         return 0;
     }
+
     public int getNumItem(String n)
     {
         for(item i: inven)
@@ -43,6 +60,7 @@ public class hero
         }
         return 0;
     }
+
     public boolean stackable(String s)
     {
         for(item i: inven)
@@ -52,6 +70,7 @@ public class hero
         }   
         return false;
     }
+
     public boolean contains(String s)
     {
         for(item i: inven)

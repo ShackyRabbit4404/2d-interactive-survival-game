@@ -14,7 +14,7 @@ public class Main
         Buttons.add(new Button(1800,20,50,30,"pause",true,true));
         Buttons.add(new Button(150,250,250,75,"wooden axe",false,true));
         Buttons.add(new Button(150,350,250,75,"stone axe",false,true));
-        Buttons.add(new Button(250,250,250,70,"wooden wall",false,true));
+        Buttons.add(new Button(425,250,250,70,"thatch hut",false,true));
         display window = new display(CurrentUser,Buttons);
         frame.add(window);
         window.setView("world");
