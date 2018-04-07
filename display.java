@@ -113,7 +113,7 @@ public class display extends JPanel
         {
             for(element e: elements)
             {
-                if(polyLArm.intersects(new Rectangle(e.getX() - currX,e.getY() - currY,e.getXLength(),e.getYLength())))
+                if(polyLArm.intersects(new Rectangle(e.getX() - currX,e.getY() - currY,e.getXLength(),e.getYLength())) && !e.name.equals("wall"))
                 {
                     if(tools.toolNames[tools.toolSelected].equals("wooden axe tool"))
                         e.health -= 6;
@@ -184,6 +184,8 @@ public class display extends JPanel
     Polygon polyLArm = new Polygon(xLeftArmPoints,yLeftArmPoints,4);
     int[][] points;
     ArrayList<Button> inventoryItems;
+    int maxPop = 0;
+    int currPop = 0;
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
@@ -403,6 +405,8 @@ public class display extends JPanel
             }
             g.setColor(Color.WHITE);
             g.drawRect((tools.toolSelected * 42)+752,902,40,40);
+            g.setFont(new Font("1", Font.PLAIN,50)); 
+            g.drawString("Popluation: " + currPop + " / " + maxPop,10,50);
         }
         else if(view.equals("inventory"))
         {
