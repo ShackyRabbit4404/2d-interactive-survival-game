@@ -19,16 +19,16 @@ public class mouse implements MouseListener
                 screen.hit();
             else
             {
-                if(MouseInfo.getPointerInfo().getLocation().x % 30 < 15 && MouseInfo.getPointerInfo().getLocation().y % 30 < 15)
-                    screen.elements.add(new element((screen.currX  + MouseInfo.getPointerInfo().getLocation().x) - ((screen.currX  + MouseInfo.getPointerInfo().getLocation().x) % 30) ,(screen.currY  + MouseInfo.getPointerInfo().getLocation().y) - ((screen.currY  + MouseInfo.getPointerInfo().getLocation().y) % 30),30,30,screen.tools.toolNames[screen.tools.toolSelected],139,69,19,100));
-                else if(MouseInfo.getPointerInfo().getLocation().x % 30 < 15 && MouseInfo.getPointerInfo().getLocation().y % 30 >= 15)
-                    screen.elements.add(new element((screen.currX  + MouseInfo.getPointerInfo().getLocation().x) - ((screen.currX  + MouseInfo.getPointerInfo().getLocation().x) % 30) ,(screen.currY  + MouseInfo.getPointerInfo().getLocation().y) + ((30 - (screen.currY  + MouseInfo.getPointerInfo().getLocation().y) % 30)),30,30,screen.tools.toolNames[screen.tools.toolSelected],139,69,19,100));
-                else if(MouseInfo.getPointerInfo().getLocation().x % 30 >= 15 && MouseInfo.getPointerInfo().getLocation().y % 30 < 15)
-                    screen.elements.add(new element((screen.currX  + MouseInfo.getPointerInfo().getLocation().x) + ((30 -(screen.currX  + MouseInfo.getPointerInfo().getLocation().x) % 30)) ,(screen.currY  + MouseInfo.getPointerInfo().getLocation().y) - ( (screen.currY  + MouseInfo.getPointerInfo().getLocation().y) % 30),30,30,screen.tools.toolNames[screen.tools.toolSelected],139,69,19,100));
-                else if(MouseInfo.getPointerInfo().getLocation().x % 30 >= 15 && MouseInfo.getPointerInfo().getLocation().y % 30 >= 15)
-                    screen.elements.add(new element((screen.currX  + MouseInfo.getPointerInfo().getLocation().x) + ((30 -(screen.currX  + MouseInfo.getPointerInfo().getLocation().x) % 30)) ,(screen.currY  + MouseInfo.getPointerInfo().getLocation().y) + ((30 - (screen.currY  + MouseInfo.getPointerInfo().getLocation().y) % 30)),30,30,screen.tools.toolNames[screen.tools.toolSelected],139,69,19,100));
-                
-                screen.currH.addItems("thatch hut",-1,"building");
+                // if(MouseInfo.getPointerInfo().getLocation().x % 30 < 15 && MouseInfo.getPointerInfo().getLocation().y % 30 < 15)
+                    // screen.elements.add(new element((screen.currX  + MouseInfo.getPointerInfo().getLocation().x) - ((screen.currX  + MouseInfo.getPointerInfo().getLocation().x) % 30) ,(screen.currY  + MouseInfo.getPointerInfo().getLocation().y) - ((screen.currY  + MouseInfo.getPointerInfo().getLocation().y) % 30),30,30,screen.tools.toolNames[screen.tools.toolSelected],139,69,19,100));
+                // else if(MouseInfo.getPointerInfo().getLocation().x % 30 < 15 && MouseInfo.getPointerInfo().getLocation().y % 30 >= 15)
+                    // screen.elements.add(new element((screen.currX  + MouseInfo.getPointerInfo().getLocation().x) - ((screen.currX  + MouseInfo.getPointerInfo().getLocation().x) % 30) ,(screen.currY  + MouseInfo.getPointerInfo().getLocation().y) + ((30 - (screen.currY  + MouseInfo.getPointerInfo().getLocation().y) % 30)),30,30,screen.tools.toolNames[screen.tools.toolSelected],139,69,19,100));
+                // else if(MouseInfo.getPointerInfo().getLocation().x % 30 >= 15 && MouseInfo.getPointerInfo().getLocation().y % 30 < 15)
+                    // screen.elements.add(new element((screen.currX  + MouseInfo.getPointerInfo().getLocation().x) + ((30 -(screen.currX  + MouseInfo.getPointerInfo().getLocation().x) % 30)) ,(screen.currY  + MouseInfo.getPointerInfo().getLocation().y) - ( (screen.currY  + MouseInfo.getPointerInfo().getLocation().y) % 30),30,30,screen.tools.toolNames[screen.tools.toolSelected],139,69,19,100));
+                // else if(MouseInfo.getPointerInfo().getLocation().x % 30 >= 15 && MouseInfo.getPointerInfo().getLocation().y % 30 >= 15)
+                    // screen.elements.add(new element((screen.currX  + MouseInfo.getPointerInfo().getLocation().x) + ((30 -(screen.currX  + MouseInfo.getPointerInfo().getLocation().x) % 30)) ,(screen.currY  + MouseInfo.getPointerInfo().getLocation().y) + ((30 - (screen.currY  + MouseInfo.getPointerInfo().getLocation().y) % 30)),30,30,screen.tools.toolNames[screen.tools.toolSelected],139,69,19,100));
+                screen.elements.add(new element(screen.currX  + MouseInfo.getPointerInfo().getLocation().x,screen.currY  + MouseInfo.getPointerInfo().getLocation().y,200,200,screen.tools.toolNames[screen.tools.toolSelected],139,69,19,100));
+                screen.currH.addItems(screen.tools.toolNames[screen.tools.toolSelected],-1,"building");
                 if(screen.currH.getNumItem("thatch hut") <= 0)
                 {   
                     screen.tools.toolNames[screen.tools.toolSelected] = "fist";
@@ -56,7 +56,7 @@ public class mouse implements MouseListener
                             screen.currH.addItems("wood",-20,"resource");
                             screen.currH.addItems("stone",-10,"resource");
                         }
-                         else if(b.name.equals("thatch hut") && screen.currH.getNumItem("wood") >= 10)
+                        else if(b.name.equals("thatch hut") && screen.currH.getNumItem("wood") >= 10)
                         {
                             if(screen.currH.stackable("thatch hut") == false)
                                 screen.currH.inven.add(new item("thatch hut",1,"building"));

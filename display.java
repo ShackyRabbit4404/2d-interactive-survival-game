@@ -96,7 +96,7 @@ public class display extends JPanel
                     else if(tools.toolNames[tools.toolSelected].equals("stone axe tool"))
                         e.health -= 20;
                     else if(tools.toolNames[tools.toolSelected].equals("fist"))
-                        e.health -= 50;
+                        e.health -= 3;
                     space = false;
                     if(e.health <= 0)
                     {

@@ -14,23 +14,19 @@ public class hero
     {
         for(item i: inven)
         {
-            if(i.name.equals(s) && n * (-1) < 0)
+            if(i.name.equals(s) && (n * (-1)) < 0)
             {   
-                if(n * -1 < 0)
+                for(int a = 0; a < n; a++)
                 {
-                    for(int a = 0; a < n; a++)
-                    {
-                        if(stackable(s))
-                            i.quantity ++;
-                        else 
-                            inven.add(new item(s,1,t));
-                    }
+                    if(stackable(s))
+                        i.quantity ++;
+                    else 
+                        inven.add(new item(s,1,t));
                 }
-                
             }
-            else if(i.name.equals(s))
+            else if(i.name.equals(s) && (n * (-1)) > 0)
             {
-                for(int a = n; a > 0; a--)
+                for(int a = n * -1; a > 0; a--)
                 {
                     if(i.quantity == 1 && !i.name.equals("wood") && !i.name.equals("stone"))
                         inven.remove(i);
