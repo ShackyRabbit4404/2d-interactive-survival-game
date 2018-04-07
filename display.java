@@ -371,7 +371,7 @@ public class display extends JPanel
                     else if(tools.toolNames[i].equals("thatch hut"))
                     {
                         g.setColor(Color.RED);
-                        g.fillRect(MouseInfo.getPointerInfo().getLocation().x - (MouseInfo.getPointerInfo().getLocation().x % 30),MouseInfo.getPointerInfo().getLocation().y - (MouseInfo.getPointerInfo().getLocation().y % 30),30,30);
+                        g.fillRect(MouseInfo.getPointerInfo().getLocation().x - 100,MouseInfo.getPointerInfo().getLocation().y - 100,200,200);
                     }
                 }
             }
