@@ -19,16 +19,17 @@ public class Main
         frame.add(window);
         window.setView("world");
         ArrayList<element> worldParts = new ArrayList<element>();
-        int rand = (int)(Math.random() * 100);
+        int rand = (int)(Math.random() * 200);
         int randX;
         int randY;
         //gen trees
         for(int i = 0; i < rand; i++)
         {
-            randX = (int)(Math.random()*2900);
-            randY = (int)(Math.random()*2900);
+            randX = (int)(Math.random()*4900);
+            randY = (int)(Math.random()*4900);
             worldParts.add(new element(randX,randY,100,100,("tree"),21,105,0,100));
         }
+        rand = (int)(Math.random()*100);
         for(int i = 0; i < rand; i++)
         {
             randX = (int)(Math.random()*2900);
