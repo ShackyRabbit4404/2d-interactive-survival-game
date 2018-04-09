@@ -32,14 +32,14 @@ public class Main
         rand = (int)(Math.random()*100);
         for(int i = 0; i < rand; i++)
         {
-            randX = (int)(Math.random()*2900);
-            randY = (int)(Math.random()*2900);
+            randX = (int)(Math.random()*4900);
+            randY = (int)(Math.random()*4900);
             worldParts.add(new element(randX,randY,100,100,("rock"),122,122,122,200));
         }
-        worldParts.add(new element(0,0,3000,1,"wall",0,0,0,100));
-        worldParts.add(new element(0,3000,3000,1,"wall",0,0,0,100));
-        worldParts.add(new element(0,0,1,3000,"wall",0,0,0,100));
-        worldParts.add(new element(3000,0,1,3000,"wall",0,0,0,100));
+        worldParts.add(new element(0,0,5000,1,"wall",0,0,0,100));
+        worldParts.add(new element(0,5000,5000,1,"wall",0,0,0,100));
+        worldParts.add(new element(0,0,1,5000,"wall",0,0,0,100));
+        worldParts.add(new element(5000,0,1,3000,"wall",0,0,0,100));
         window.setElements(worldParts);
         int currentX = 0;
         int currentY = 0;
