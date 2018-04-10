@@ -63,8 +63,6 @@ public class display extends JPanel
             if(D == true && isTouching(elements))
                 currX -= 2;
         }
-        if(space == true)
-            hit();
         repaint();
     }
     int punchMoveX = 40;
@@ -298,7 +296,6 @@ public class display extends JPanel
                 yLeftArmPoints[2] = (int)((-32 * Math.sin(t1.angle)) + (punchMoveY * Math.cos(t1.angle))) + 540;
                 yLeftArmPoints[3] = (int)((-22 * Math.sin(t1.angle)) + (punchMoveY * Math.cos(t1.angle))) + 540;
             }
-
             //g.fillRect(935,515,50,50);
             if(punchMoveX > 40)
                 punchMoveX --;
@@ -315,7 +312,7 @@ public class display extends JPanel
             g.setColor(new Color(239,223,173));
             g.fillPolygon(polyRArm);
             g.fillPolygon(polyLArm);
-            
+
             for(element q: elements)
             {
                 int[] rgb = q.getColor();
@@ -576,13 +573,13 @@ public class display extends JPanel
                         else if(b.name.equals("stone axe"))
                             g.drawString("x20 wood + x10 stone",b.X + 15,b.Y + 60);
                         else if(b.name.equals("thatch hut"))
-                                g.drawString("x10 wood",b.X + 15,b.Y + 60);
+                            g.drawString("x10 wood",b.X + 15,b.Y + 60);
                     }
                 }
             }
         }
         try{
-           // Thread.sleep(16);
+            // Thread.sleep(16);
         }
         catch(Exception e)
         {
@@ -590,7 +587,14 @@ public class display extends JPanel
         }
         drawing();
     }
-
+    public void maxPopChange(int c)
+    {
+        maxPop += c;
+    }
+    public void popChange(int c)
+    {
+        currPop += c;
+    }
     public int[][] findPoints(int x, int y,int xx, int yy)
     {
         int[][] ret = new int[4][2];

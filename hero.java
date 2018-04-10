@@ -6,7 +6,7 @@ public class hero
     ArrayList<item> inven = new ArrayList<item>();
     public void setUpInventory()
     {
-        inven.add(new item("wood",50,"resource"));
+        inven.add(new item("wood",0,"resource"));
         inven.add(new item("stone",0,"resource"));
     }
 

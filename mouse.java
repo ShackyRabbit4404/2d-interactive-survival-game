@@ -29,6 +29,7 @@ public class mouse implements MouseListener
                     // screen.elements.add(new element((screen.currX  + MouseInfo.getPointerInfo().getLocation().x) + ((30 -(screen.currX  + MouseInfo.getPointerInfo().getLocation().x) % 30)) ,(screen.currY  + MouseInfo.getPointerInfo().getLocation().y) + ((30 - (screen.currY  + MouseInfo.getPointerInfo().getLocation().y) % 30)),30,30,screen.tools.toolNames[screen.tools.toolSelected],139,69,19,100));
                 screen.elements.add(new element(screen.currX  + MouseInfo.getPointerInfo().getLocation().x - 100,screen.currY  + MouseInfo.getPointerInfo().getLocation().y - 100,200,200,screen.tools.toolNames[screen.tools.toolSelected],139,69,19,100));
                 screen.currH.addItems(screen.tools.toolNames[screen.tools.toolSelected],-1,"building");
+                screen.maxPopChange(5);
                 if(screen.currH.getNumItem("thatch hut") <= 0)
                 {   
                     screen.tools.toolNames[screen.tools.toolSelected] = "fist";
