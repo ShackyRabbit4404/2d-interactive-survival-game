@@ -6,7 +6,7 @@ public class hero
     ArrayList<item> inven = new ArrayList<item>();
     public void setUpInventory()
     {
-        inven.add(new item("wood",0,"resource"));
+        inven.add(new item("wood",50,"resource"));
         inven.add(new item("stone",0,"resource"));
     }
 
@@ -36,7 +36,15 @@ public class hero
             }
         }
     }
-
+    public boolean checkResource(String s)
+    {
+        for(item i:inven)
+        {
+            if(i.name.equals(s))
+                return true;
+        }
+        return false;
+    }
     public int getItemNum(String n)
     {
         for(int i = 0; i < inven.size(); i++)

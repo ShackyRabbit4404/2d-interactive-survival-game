@@ -32,7 +32,6 @@ public class mouse implements MouseListener
                 if(screen.currH.getNumItem("thatch hut") <= 0)
                 {   
                     screen.tools.toolNames[screen.tools.toolSelected] = "fist";
-                    screen.currH.inven.remove(screen.currH.getItemNum("thatch hut"));
                 }
             }
         }

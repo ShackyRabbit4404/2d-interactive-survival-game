@@ -315,7 +315,7 @@ public class display extends JPanel
             g.setColor(new Color(239,223,173));
             g.fillPolygon(polyRArm);
             g.fillPolygon(polyLArm);
-
+            
             for(element q: elements)
             {
                 int[] rgb = q.getColor();
