@@ -99,7 +99,11 @@ public class display extends JPanel
                     if(e.health <= 0)
                     {
                         if(e.name.equals("tree"))
+                        {
+                            if(Math.random() < 0.2)
+                                currH.addItems("food",(int)((Math.random() * 5) + 1),"resource");
                             currH.addItems("wood",3,"resource");
+                        }
                         if(e.name.equals("rock"))
                             currH.addItems("stone",5,"resource");
                         elements.remove(e);
@@ -425,12 +429,13 @@ public class display extends JPanel
             g.setFont(new Font("2",Font.PLAIN,40));
             g.drawString("Wood   " + currH.getNumItem("wood"),150,250);
             g.drawString("Stone   " + currH.getNumItem("stone"),150,300);
+            g.drawString("Food " + currH.getNumItem("food"),150,350);
             int x = 515;
             int y = 75;
             inventoryItems = new ArrayList<Button>();
             for(item i: currH.inven)
             {
-                if(!i.name.equals("wood") && !i.name.equals("stone") && y < 900)
+                if(!i.name.equals("wood") && !i.name.equals("stone") && y < 900 && !i.name.equals("food"))
                 {
                     inventoryItems.add(new Button(x,y,50,50,i.name,true,true));
                     if(x < 1775)

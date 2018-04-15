@@ -8,6 +8,7 @@ public class hero
     {
         inven.add(new item("wood",0,"resource"));
         inven.add(new item("stone",0,"resource"));
+        inven.add(new item("food",0,"resource"));
     }
 
     public void addItems(String s,int n,String t)
@@ -28,7 +29,7 @@ public class hero
             {
                 for(int a = n * -1; a > 0; a--)
                 {
-                    if(i.quantity == 1 && !i.name.equals("wood") && !i.name.equals("stone"))
+                    if(i.quantity == 1 && !i.name.equals("wood") && !i.name.equals("stone") && !i.name.equals("food"))
                         inven.remove(i);
                     else 
                         i.quantity --;
