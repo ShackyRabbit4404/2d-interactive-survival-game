@@ -36,7 +36,10 @@ public class display extends JPanel
     {
         view = s;
     }
-
+    public void subtractHunger()
+    {
+        
+    }
     public void setElements(ArrayList<element> x)
     {
         elements = x;
