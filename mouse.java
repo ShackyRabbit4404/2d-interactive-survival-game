@@ -70,11 +70,11 @@ public class mouse implements MouseListener
         }
         else if(screen.view.equals("inventory"))
         {
+            Rectangle mousePointer = new Rectangle(MouseInfo.getPointerInfo().getLocation().x,MouseInfo.getPointerInfo().getLocation().y,2,2);
             for(Button b: screen.inventoryItems)
             {
-                if(b.visible == true)
+                 if(b.visible == true)
                 {
-                    Rectangle mousePointer = new Rectangle(MouseInfo.getPointerInfo().getLocation().x,MouseInfo.getPointerInfo().getLocation().y,2,2);
                     if(mousePointer.intersects(new Rectangle(b.X,b.Y + 40,b.XLength,b.YLength)))
                     {
                         screen.tools.toolNames[screen.tools.toolSelected] = b.name; 
@@ -82,6 +82,11 @@ public class mouse implements MouseListener
                     }
                 }
             }
+            if(mousePointer.intersects(new Rectangle(100,500,125,75)) && screen.currH.getNumItem("food") > 0 && screen.currH.hunger != screen.currH.maxHunger)
+                {
+                    screen.changeHunger(1);
+                    screen.currH.addItems("food",-1,"resource");
+                }
         }
     }
 

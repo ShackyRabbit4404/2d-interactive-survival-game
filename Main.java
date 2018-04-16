@@ -15,6 +15,7 @@ public class Main
         Buttons.add(new Button(150,250,250,75,"wooden axe",false,true));
         Buttons.add(new Button(150,350,250,75,"stone axe",false,true));
         Buttons.add(new Button(425,250,250,70,"thatch hut",false,true));
+        Buttons.add(new Button(50,700,100,50,"Eat",false,true));
         display window = new display(CurrentUser,Buttons);
         frame.add(window);
         window.setView("world");
@@ -47,5 +48,8 @@ public class Main
         frame.addKeyListener(listener);
         mouse mouseListener = new mouse(window,Buttons);
         frame.addMouseListener(mouseListener);
+        (new Thread(new timer(1000,window))).start();
+        window.setTimer(new timer(1000,window));
+        
     }
 }

@@ -2,6 +2,8 @@ import java.util.*;
 public class hero
 {
     int health = 100;
+    int hunger  = 20;
+    int maxHunger = 20;
     int maxHealth = 100;
     ArrayList<item> inven = new ArrayList<item>();
     public void setUpInventory()

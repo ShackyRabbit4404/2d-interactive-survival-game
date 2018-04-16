@@ -32,14 +32,22 @@ public class display extends JPanel
     boolean space;
     boolean E = false;
     boolean Q = false;
+    timer time;
+    public void setTimer(timer t)
+    {
+        time = t;
+    }
+
     public void setView(String s)
     {
         view = s;
     }
-    public void subtractHunger()
+
+    public void changeHunger(int h)
     {
-        
+        currH.hunger += h;
     }
+
     public void setElements(ArrayList<element> x)
     {
         elements = x;
@@ -103,9 +111,9 @@ public class display extends JPanel
                     {
                         if(e.name.equals("tree"))
                         {
-                            if(Math.random() < 0.2)
-                                currH.addItems("food",(int)((Math.random() * 5) + 1),"resource");
-                            currH.addItems("wood",3,"resource");
+                            
+                            currH.addItems("food",1,"resource");
+                            currH.addItems("wood",4,"resource");
                         }
                         if(e.name.equals("rock"))
                             currH.addItems("stone",5,"resource");
@@ -191,6 +199,16 @@ public class display extends JPanel
     ArrayList<Button> inventoryItems;
     int maxPop = 0;
     int currPop = 0;
+    int seconds = 0;
+    int minutes = 0;
+    int hours = 0;
+    public void setTime(int s,int m,int h)
+    {
+        seconds = s;
+        minutes = m;
+        hours = h;
+    }
+
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
@@ -407,10 +425,28 @@ public class display extends JPanel
                 }
                 count ++;
             }
+            //draw information
             g.setColor(Color.WHITE);
             g.drawRect((tools.toolSelected * 42)+752,902,40,40);
             g.setFont(new Font("1", Font.PLAIN,50)); 
             g.drawString("Popluation: " + currPop + " / " + maxPop,10,50);
+            g.setFont(new Font("1", Font.PLAIN,25));
+            g.drawString("Hours: " + hours + " Minutes: " + minutes + " Seconds: " + seconds,10,110);
+            g.drawString("Hunger: " + currH.hunger,10,140);
+            //draw health bar
+            g.setColor(Color.WHITE);
+            g.fillRect(910,580,101,21);
+            g.setColor(Color.BLACK);
+            g.drawRect(910,580,101,21);
+            g.setColor(Color.GREEN);
+            g.fillRect(911,581,currH.health,20);
+            //draw Hunger Bar
+            g.setColor(Color.WHITE);
+            g.fillRect(910,610,101,21);
+            g.setColor(Color.BLACK);
+            g.drawRect(910,610,101,21);
+            g.setColor(new Color(196,71,0));
+            g.fillRect(911,611,currH.hunger * 5,20);
         }
         else if(view.equals("inventory"))
         {
@@ -419,6 +455,7 @@ public class display extends JPanel
             Buttons.get(0).visible = false;
             Buttons.get(1).visible = false;
             Buttons.get(2).visible = false;
+            Buttons.get(3).visible = true;
             g.setColor(new Color(74,184,71));
             g.fillRect(0,0,1920,1080);
             g.setColor(Color.GRAY);
@@ -428,6 +465,7 @@ public class display extends JPanel
             g.drawLine(490,75,490,925);
             g.setFont(new Font("1", Font.PLAIN,50)); 
             g.setColor(Color.WHITE);
+            //draw info on left half
             g.drawString("INVENTORY",100,150);
             g.setFont(new Font("2",Font.PLAIN,40));
             g.drawString("Wood   " + currH.getNumItem("wood"),150,250);
@@ -453,9 +491,9 @@ public class display extends JPanel
             }
             x = 515;
             y = 75;
-            for(Button i: inventoryItems)
+            for(Button b: inventoryItems)
             {
-                if(!i.name.equals("wood") && !i.name.equals("stone") && y < 900)
+                if(!b.name.equals("wood") && !b.name.equals("stone") && y < 900)
                 {
                     g.setColor(Color.WHITE);
                     g.fillRect(x,y,50,50);
@@ -467,6 +505,31 @@ public class display extends JPanel
                         y += 75;
                     }
                 }
+            }
+            Rectangle mousePointer = new Rectangle(MouseInfo.getPointerInfo().getLocation().x,MouseInfo.getPointerInfo().getLocation().y,1,1);
+            if(currH.getNumItem("food") <= 0 || currH.maxHunger == currH.hunger)
+            {
+                g.setColor(Color.BLACK);
+                g.fillRect(100,500,125,75);
+                g.setColor(Color.RED);
+                g.drawRect(100,500,125,75);
+                g.drawString("Eat",100 + 15, 550);
+            }
+            else if(mousePointer.intersects(new Rectangle(100,550,125,75)))
+            {
+                g.setColor(Color.BLACK);
+                g.fillRect(100,500,125,75);
+                g.setColor(Color.WHITE);
+                g.drawRect(100,500,125,75);
+                g.drawString("Eat",100 + 15, 550);
+            }
+            else 
+            {
+                g.setColor(Color.WHITE);
+                g.fillRect(100,500,125,75);
+                g.setColor(Color.BLACK);
+                g.drawRect(100,500,125,75);
+                g.drawString("Eat",100 + 15, 550);
             }
             g.setColor(Color.GRAY);
             g.fillRect(750,900,422,44);
@@ -595,14 +658,17 @@ public class display extends JPanel
         }
         drawing();
     }
+
     public void maxPopChange(int c)
     {
         maxPop += c;
     }
+
     public void popChange(int c)
     {
         currPop += c;
     }
+
     public int[][] findPoints(int x, int y,int xx, int yy)
     {
         int[][] ret = new int[4][2];
