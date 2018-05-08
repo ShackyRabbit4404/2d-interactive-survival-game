@@ -27,7 +27,6 @@ public class keyboard extends KeyAdapter
                 screen.view = "inventory";
             else
                 screen.view = "world";
-            System.out.println(screen.view);
         }
         if(key == KeyEvent.VK_Q)
         {
